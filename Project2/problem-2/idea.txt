@@ -1,0 +1,25 @@
+functions to have
+
+check end
+this one equals to last one
+
+
+Move:
+check id
+check if at the final destination
+check energy enough
+move
+
+initialize timestep
+initialize dict
+when (timestep + 1):
+    if consider == the last key item
+        exit
+    else:
+        for each horse
+            check id
+            check if at the final destination
+            check energy enough
+            update list
+        make change to dict
+    timestep++
