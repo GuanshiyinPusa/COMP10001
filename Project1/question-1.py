@@ -32,7 +32,7 @@ def check_path(elevations, path, capacities, assignments):
 
     for h in path:
         if h[0] > (len(village_elevations) - 1) or h[1] > \
-            (len(village_elevations[0]) - 1):
+                (len(village_elevations[0]) - 1):
             return path[-1], 'Cell coordinate is out of bounds'
 
     # Path should start at (0,0) coordinate:
