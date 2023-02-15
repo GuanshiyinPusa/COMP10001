@@ -1,0 +1,6 @@
+statement: single commands to the computor
+sequence: linear sequence of statements
+control: perform sequence of statements if blah blah blah
+loops: repeat sequences of statements
+functions: blocks of code that can be run with different inputs
+recursion = blocks of code that call themselves with different inputs

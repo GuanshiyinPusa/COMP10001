@@ -1,0 +1,81 @@
+handle error using try except
+
+try executes its block of code,
+passes off if there is an error to except
+before running to the block called finally
+
+finally is used to clean up resources:
+the structure is:
+
+try:
+    ...
+except:
+    ...
+finally:
+    ...
+
+
+assertion:
+
+assert:
+YOU ASSERT SOMETHING, IF IT IS FALSE, YOU RETURN ASSERTIONERROR
+
+for element in [1,2,3]:
+    print(element)
+
+
+Iterators:
+definition: an iterator is an object that keeps track of the traversal of a container
+
+object: something you can manipulate
+traverse: walk through/across
+container: an object representing a collection of other objects
+
+iter
+# list of vowels
+vowels = ["a", "e", "i", "o", "u"]
+
+# iter() with a list of vowels
+vowels_iter = iter(vowels)
+
+print(next(vowels_iter))
+print(next(vowels_iter))
+print(next(vowels_iter))
+print(next(vowels_iter))
+print(next(vowels_iter))
+
+a
+e
+i
+o
+u
+
+# Python code demonstrating
+# basic use of iter()
+
+listB = ['Cat', 'Bat', 'Sat', 'Mat']
+
+
+iter_listB = listB.__iter__()
+
+try:
+	print(iter_listB.__next__())
+	print(iter_listB.__next__())
+	print(iter_listB.__next__())
+	print(iter_listB.__next__())
+	print(iter_listB.__next__()) #StopIteration error
+except:
+	print(" \nThrowing 'StopIterationError'",
+					"I cannot count more.")
+
+# Python code demonstrating
+# basic use of iter()
+lst = [11, 22, 33, 44, 55]
+
+iter_lst = iter(lst)
+while True:
+	try:
+		print(iter_lst.__next__())
+	except:
+		break
+

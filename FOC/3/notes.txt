@@ -1,0 +1,183 @@
+the day of fact
+
+last lecture:
+literals
+Basic data types
+variables and assignment
+
+mentioned data types: integer, float, string
+
+we can convert data types:
+int(5/2)
+2
+
+what is variables?
+sth can store and be assigned
+
+a = 3+1
+a,b, = 1,2
+
+print(a,b)
+
+consultations 11-12 right after lecture same place
+
+ assign a = 2*3
+
+we work out the right hand first then we assign
+
+a + 1 = 3 !!!error
+
+there should be an single object on the left side, GENERALLY
+
+we can not assign a literal to a literal
+
+3 = 1 !!!!error
+
+class excercise:
+
+>>> a  = 1
+>>> b = 0.2
+>>> a = a + 1
+>>> b = b + a
+>>> print(a)
+2
+>>> print(b)
+2.2
+
+use python tutor for that ## boring..X<
+
+try to make your variable name readable
+
+Fibonac
+
+a1, a2 = 1,1
+a3 = a1 + a2
+
+STRINGS:
+
+a = 'a'
+b = 'hello?'
+is the same type -- string
+
+we can use two type of quotes to print quotes
+
+eg:
+a = "'hello'"
+
+print(a)
+
+>>> a = "'hello'"
+>>> print(a)
+'hello'
+>>> 
+
+string operators
+
++ * in
+
+print("a" + "b")
+>>> ab
+
+print('z' * 20)
+>>> zzzzzzzzzzzzzzzzzzzz
+
+in(subset  ... see next lecture for details)
+
+print('ab' in 'lab')
+True
+
+Overloading
+
+print(1 + 'a') --- overloading
+
+
+length of string
+
+len("Hello World")
+>>>11
+
+str(2)
+>>> '2'
+
+"hello world".upper()
+"HELLO WORLD"
+
+>>> "hello world".upper()
+'HELLO WORLD'
+>>> "HELLLO WORLD".lower()
+'helllo world'
+
+INPUT:
+
+num = input("Provide a number")
+
+print(num)
+
+class excercise: ask for a num and print its digit
+
+>>> num = input("provide a number: ")
+provide a number: 23
+>>> print(num)
+23
+>>> len(str(num))
+2
+
+we gonna do check if the input is a number later in the class
+
+string formating:
+
+instead of using + we use f"{}"
+
+
+string as sequences
+
+index, slie, split
+
+story = "it was a dark"
+story[-8]
+'s'
+
+story[5]
+'s'
+
+>>> story[0:2]
+'it'
+>>> story[:2]
+'it'
+>>> story[:-5]
+'it was a'
+>>> story[:]
+'it was a dark'
+>>> story[::-1]
+'krad a saw ti'
+>>> story[::2]
+'i a  ak'
+
+we add 2 every time 
+
+>>> story[::7]
+'ia'
+>>> story[-1:-7:-1]
+'krad a'
+>>> story[-1:-7]
+''
+>>> story[-1:-7:-2]
+'ka '
+>>> story[-7:-1:-1]
+''
+>>> story[-7:-1:1]
+' a dar'
+
+BOOLEAN
+
+yes or no question
+
+0   1   2   3   4   5   6   7   8   9   10  11  12
+i   t       w   a   s       a       d   a   r   k
+
+::-1
+
+0 - 1 = -1 : k
+-1 - 1 = -2 : r
+
+::2

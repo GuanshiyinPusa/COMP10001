@@ -1,0 +1,19 @@
+mylist = []
+for key, val in mydict.items():
+    mylist.append((val,key))
+
+[(val, key) for key, val in mydict.items()
+
+[v + s for s in 'SHDC' for v in 'A234567890JQK]
+
+[i for i in range(-9, 10, 2) if not (i % 3)]
+
+File io
+
+reading files
+
+reading data in from a local files
+text = open(FILENAME).read()
+lines = open(FILENAME).readlines()
+
+

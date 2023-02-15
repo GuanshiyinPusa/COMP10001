@@ -1,0 +1,15 @@
+day of fact
+
+in person drop in 11-12 right after lecture same place. Tuesday and Wednessday
+
+Thursday is Australia Day no lectures, workshops and consultations
+
+
+review: 
+
+
+boolean algebra and conditionals
+functions methods tuples comments
+
+indexing:
+

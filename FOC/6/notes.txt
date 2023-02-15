@@ -1,0 +1,59 @@
+lecture algebra:
+PEP8 and commenting
+debugging and testing
+
+dictionaries
+sets
+libraries and modules
+
+dictionaries:
+phone list:
+kat: 41363
+....
+
+favourite movies
+whisper of the heart: 4.5 Stars
+>>> mydict = {'latte' : 3.5, 'chai':3.0}
+>>> mydict
+{'latte': 3.5, 'chai': 3.0}
+>>> mydict['water'] = 1.0
+>>> mydict
+{'latte': 3.5, 'chai': 3.0, 'water': 1.0}
+>>> mydict['water']
+1.0
+>>> mydict.get('water')
+1.0
+>>> water_price = mydict.pop('water')
+>>> water_price
+1.0
+>>> mydict
+{'latte': 3.5, 'chai': 3.0}
+
+
+def word_freq(text):
+    freq = {}
+    for word in text.split():
+    
+
+>>> a = set('abra')
+>>> b = set('alac')
+>>> a
+{'r', 'a', 'b'} # unique letters in a
+>>> b
+{'c', 'a', 'l'}
+>>> a - b # set diff
+{'r', 'b'}
+>>> a | b # set union
+{'c', 'a', 'r', 'b', 'l'}
+>>> a & b #set intersection
+{'a'}
+
+>>> a.intersection_update(b)
+>>> a
+{'a'}
+
+hashable
+
+immutable is hashable
+
+int, float, str, tuple, bool

@@ -1,0 +1,47 @@
+Feb 14th Valentine's day
+
+ip address is as a 4 '8 bits' integers, each in range[0,255]
+ipv6
+
+we dhave the hostnames like google.com has 172.217.167.110
+
+multiplication run over IP networks
+
+email
+www HTTP
+chat/instant messaging
+
+
+URLS
+uniform resource locators
+
+urls are made up of the following parts
+scheme://hostname:port/path
+
+scheme = protocol for accessing the file    HTTP
+hostname = the device the file lives on clienet side, default
+port = access port(optional)
+path = where the file lives
+
+HTMML hypertext markup language
+
+
+f12 for HTML
+
+<> is called a tag
+we have an opening tag and a closing one
+
+<i> italics
+<b> bold
+<u> underline
+
+<h1> header 1
+
+python dynamic HTML using python within Grok
+Django lets you produce a webpage
+
+import urllib.request
+
+
+
+

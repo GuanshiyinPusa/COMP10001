@@ -1,0 +1,17 @@
+1. day fact
+2. who what where and when
+3. speakup forum: link on pdf
+
+
+Who?
+Ekaterina Vylomova
+Tutors...
+
+Stanley: Data61
+
+What?
+Fuck data
+
+python, basic data types, problem solving
+
+will be using Grok

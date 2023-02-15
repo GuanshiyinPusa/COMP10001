@@ -1,0 +1,10 @@
+PEP8
+commenting
+
+class excercise
+
+global variable
+
+global _id
+
+it's a global variable i
