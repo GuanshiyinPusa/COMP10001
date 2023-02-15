@@ -1,0 +1,23 @@
+Rewrite the following function, replacing the for loop with a while loop:
+
+def myhash(string, maxlen=4):
+    if len(string) > maxlen:
+        return False
+    result = 0
+    for i in range(len(string)):
+        part_a = 27**(maxlen - i - 1)
+        part_b = 1 + ord(string[i]) - ord('a')
+        result += part_a * part_b
+    return result
+
+def myhash(orig, max_len=4):
+    ord_a = ord('a')
+    out = 0
+    if len(orig) > max_len:
+        return False
+    for i in range(len(orig)):
+        add = - ord_a + ord(orig[i])
+        exp = 27**(max_len - i - 1)
+        out += (add + 1) * exp
+    return out
+

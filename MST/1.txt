@@ -1,0 +1,114 @@
+(a) Output value: 'frodo'
+Required operations:
+string slicing
+concatenation
+(b) Output value: True
+Required operations:
+string concatentation
+!=
+(c) Output value: 3
+Required operations:
+len()
+range()
+(d) Output value: 'yon'
+Required operations:
+.values()
+string slicing
+list()
+(e) Output value: 'pylicious'
+Required operations:
+dictionary lookup
+string slicing
++
+
+(a) Output value: 'dodgy'
+Required operations:
+string indexing
+concatenation
+(b) Output value: True
+Required operations:
+string concatentation
+!=
+(c) Output value: 0
+Required operations:
+.index()
+.split()
+(d) Output value: ('to', 'fro')
+Required operations:
+.pop()
+.items()
+list()
+(e) Output value: 'pylicious'
+Required operations:
+dictionary lookup
+string slicing
++
+
+(a) Output value: 'dodgy'
+Required operations:
+string indexing
+concatenation
+(b) Output value: True
+Required operations:
+not
+.pop()
+(c) Output value: 3
+Required operations:
+len()
+range()
+(d) Output value: 'yon'
+Required operations:
+.values()
+string slicing
+list()
+(e) Output value: True
+Required operations:
+not
+sorted()
+.keys()
+
+(a) Output value: 'frodo'
+Required operations:
+string slicing
+concatenation
+(b) Output value: True
+Required operations:
+not
+.pop()
+(c) Output value: 0
+Required operations:
+.index()
+.split()
+(d) Output value: ('to', 'fro')
+Required operations:
+.pop()
+.items()
+list()
+(e) Output value: True
+Required operations:
+not
+sorted()
+.keys()
+
+(a) Output value: 'totoro'
+Required operations:
+string slicing
+concatenation
+(b) Output value: True
+Required operations:
+string concatentation
+!=
+(c) Output value: 3
+Required operations:
+len()
+range()
+(d) Output value: 'yon'
+Required operations:
+.values()
+string slicing
+list()
+(e) Output value: True
+Required operations:
+not
+sorted()
+.keys()

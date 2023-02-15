@@ -1,0 +1,92 @@
+The following function bisplitindrome() takes a string word, a dictionary of strings dictionary, and an optional minlength integer parameter (default = 3), and determines whether word is a "bisplitindrome" (yes, Tim made that up), in which case it returns a list of reverse sub-words in increasing order of the length of the first word; if the word is not a bisplitindrome, the function should return False.
+
+A "bisplitindrome" is a word which can be split into two sub-words of length minlength or greater, where the reverse of each of those words is contained in dictionary. For example, wombats is a bisplitindrome because it can be split into wom and bats, both of which are valid words in reverse (mow and stab, respectively).
+
+For example:
+
+>>> bisplitindrome('wombats', {'mow': True, 'stab': True})
+[('mow', 'stab')]
+>>> bisplitindrome('tastes', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=2)
+[('at', 'sets'), ('sat', 'set')]
+>>> bisplitindrome('tastes', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=3)
+[('sat', 'set')]
+>>> bisplitindrome('wombats', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=3)
+False
+
+
+Note that you can assume that the value of all words in dictionary is True (i.e. you can ignore the value).
+
+Using the code editor to the right, provide a single statement to insert into each of the numbered boxes to complete the code as described. Note that your code should run at the indentation level indicated for each box.
+
+def bisplitindrome(word, dictionary, minlength=3):
+    1
+    for i in range(minlength, len(word) - minlength + 1):
+        2
+        rev_subword2 = word[-1:i-1:-1]
+        3
+            valid_splits.append((rev_subword1, rev_subword2))
+    4
+        return valid_splits
+    5
+
+The following function bisplitindrome() takes a string word, a dictionary of strings dictionary, and an optional minlength integer parameter (default = 3), and determines whether word is a "bisplitindrome" (yes, Tim made that up), in which case it returns a list of reverse sub-words in increasing order of the length of the first word; if the word is not a bisplitindrome, the function should return False.
+
+A "bisplitindrome" is a word which can be split into two sub-words of length minlength or greater, where the reverse of each of those words is contained in dictionary. For example, wombats is a bisplitindrome because it can be split into wom and bats, both of which are valid words in reverse (mow and stab, respectively).
+
+For example:
+
+>>> bisplitindrome('wombats', {'mow': True, 'stab': True})
+[('mow', 'stab')]
+>>> bisplitindrome('tastes', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=2)
+[('at', 'sets'), ('sat', 'set')]
+>>> bisplitindrome('tastes', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=3)
+[('sat', 'set')]
+>>> bisplitindrome('wombats', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=3)
+False
+
+def bisplitindrome(word, dictionary, minlength=3):
+    #    1    
+    subword1 = word[:minlength]
+    subword2 = word[minlength:]
+    for i in range(minlength, len(word) - minlength + 1):
+        #    2    
+            split_words.append((subword1[::-1], subword2[::-1]))
+        subword1 += subword2[0]
+        #    3    
+    #    4    
+        return split_words
+    #    5    
+
+ 
+The following function bisplitindrome() takes a string word, a dictionary of strings dictionary, and an optional minlength integer parameter (default = 3), and determines whether word is a "bisplitindrome" (yes, Tim made that up), in which case it returns a list of reverse sub-words in increasing order of the length of the first word; if the word is not a bisplitindrome, the function should return False.
+
+A "bisplitindrome" is a word which can be split into two sub-words of length minlength or greater, where the reverse of each of those words is contained in dictionary. For example, wombats is a bisplitindrome because it can be split into wom and bats, both of which are valid words in reverse (mow and stab, respectively).
+
+For example:
+
+>>> bisplitindrome('wombats', {'mow': True, 'stab': True})
+[('mow', 'stab')]
+>>> bisplitindrome('tastes', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=2)
+[('at', 'sets'), ('sat', 'set')]
+>>> bisplitindrome('tastes', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=3)
+[('sat', 'set')]
+>>> bisplitindrome('wombats', {'at': True, 'sat': True, 'set': True, 'sets': True}, minlength=3)
+False
+
+Note that you can assume that the value of all words in dictionary is True (i.e. you can ignore the value).
+
+Using the code editor to the right, provide a single statement to insert into each of the numbered boxes to complete the code as described. Note that your code should run at the indentation level indicated for each box.
+
+def bisplitindrome(word, dictionary, minlength=3):
+    #    1    
+    subwords = []
+    for i in range(minlength, len(word) - minlength + 1):
+        #    2    
+        subword2 = word[-1:i-1:-1]
+        subwords.append((subword1, subword2))
+    for candidate in subwords:
+        #    3    
+            word_pairs.append(candidate)
+    #    4    
+        return word_pairs
+    #    5    
