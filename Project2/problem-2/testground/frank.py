@@ -1,19 +1,15 @@
-# path_diff = {(0, 0): 2, (1, 0): 5, (2, 0): -1, (2, 1): 19}
-# path = [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]
-
-# ponies = [(0, 's', [7, (0, 0)]),
-#             (1, 's', [2, (0, 0)]),
-#             (2, 's', [25, (0, 0)])]
-
-# elevations = [[0, 32, 45], [2, 5, 19], [7, 6, 25]]
-
 def find_distance(elevations, path):
-    distance = (
-        elevations[x][y] - elevations[m][n]
-        for (x, y), (m, n) in zip(path[1:], path)
-    )
-    answer = {p: d for p, d in zip(path, distance)}
-    return answer
+    result = {}
+    prev_coord = path[0]
+    for coord in path[1:]:
+        try:
+            elevation_diff = elevations[coord[0]][coord[1]] - elevations[prev_coord[0]][prev_coord[1]]
+        except IndexError:
+            print(f"Removing {coord} due to IndexError")
+            continue
+        result[prev_coord] = elevation_diff
+        prev_coord = coord
+    return result
 
 
 def check_move(pony, path, path_diff, timestep):
@@ -41,10 +37,7 @@ def check_energy(pony, path_diff):
 
 
 def loop_ponies(ponies, path, path_diff, timestep):
-    pony_list = []
-    for pony in ponies:
-        pony_list.append(check_move(pony, path, path_diff, timestep))
-    return pony_list
+    return [check_move(pony, path, path_diff, timestep) for pony in ponies]
 
 
 def selfish_climb(elevations, path, ponies):
@@ -54,10 +47,14 @@ def selfish_climb(elevations, path, ponies):
     while True:
         log[timestep+1] = loop_ponies(log[timestep], path, path_diff, timestep+1)
         # check if reaches the final step
-        if log[timestep+1] == log[timestep]:
+        if log[timestep + 1] == log[timestep] and timestep > max(
+            pony[0] for pony in ponies
+        ):
             del log[timestep+1]
             return log
         timestep+=1
 
 # print(selfish_climb([[0, 32, 45], [2, 5, 19], [7, 6, 25]], [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)], [(0, 's', [7, (0, 0)]), (1, 's', [2, (0, 0)]), (2, 's', [25, (0, 0)])]))
-print(selfish_climb([[0, 10, 20], [0, 0, 20], [0, 0, 0]], [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3)], [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])]))
+# print(selfish_climb([[0, 10, 20], [0, 0, 20], [0, 0, 0]], [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3)], [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])]))
+# print(selfish_climb([[0, 0], [0, 0]], [(0, 0), (1, 0), (1, 1)], [(0, 's', [0, (0, 0)])]))
+# print(selfish_climb([[100, 90, 80, 0], [30, 20, 40, 100], [31, 45, 0, 400]], [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3), (2, 3)], [(0, 's', [0, (0, 0)]), (1, 's', [10, (0, 0)])]))

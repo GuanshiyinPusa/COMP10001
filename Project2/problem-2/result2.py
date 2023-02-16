@@ -12,8 +12,7 @@ def find_distance(elevations, path):
         elevations[x][y] - elevations[m][n]
         for (x, y), (m, n) in zip(path[1:], path)
     )
-    answer = {p: d for p, d in zip(path, distance)}
-    return answer
+    return dict(zip(path, distance))
 
 
 def check_move(pony, path, path_diff, timestep):
@@ -41,10 +40,7 @@ def check_energy(pony, path_diff):
 
 
 def loop_ponies(ponies, path, path_diff, timestep):
-    pony_list = []
-    for pony in ponies:
-        pony_list.append(check_move(pony, path, path_diff, timestep))
-    return pony_list
+    return [check_move(pony, path, path_diff, timestep) for pony in ponies]
 
 
 def selfish_climb(elevations, path, ponies):
