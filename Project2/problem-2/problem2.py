@@ -1,10 +1,12 @@
 def find_distance(elevations, path):
-    distance = (
+    # Use tuple unpacking to extract the path list
+    # and the elevations list of lists
+    distance_list = [
         elevations[x][y] - elevations[m][n]
-        for (x, y), (m, n) in zip(path[1:], path)
-    )
-    answer = {p: d for p, d in zip(path, distance)}
-    return answer
+        for i, (x, y) in enumerate(path[1:])
+        for m, n in [path[i]]
+    ]
+    return distance_list
 
 
 def run_pony(timestep, p, distance_list,path):
