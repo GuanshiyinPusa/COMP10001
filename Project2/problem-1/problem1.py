@@ -1,8 +1,7 @@
-  
-def read_file_1(file_name): # shortest
+def read_file(file_name): # shortest
     with open(file_name, "r") as f:
         content = [line.strip() for line in f.read().split("\n\n")]
-    return split_elevation(content[0].split("\n")[1:]), split_path(content[1].split("\n")[1:]), split_ponies(content[2].split("\n")[1:])
+    return split_elevation(content[0].split("\n")[1:]), split_path(content[1].split("\n")[1:]), split_ponies_1(content[2].split("\n")[1:])
 
 
 def split_elevation(elevations):
@@ -18,20 +17,22 @@ def parse_string(my_list):
     return [x, (y, z)]
 
 
+def split_ponies_1(ponies):
+    return [(int(p[0]), p[1], parse_string(p[2:])) for p in (pony.split(",") for pony in ponies)]
 
-def split_ponies(ponies):
-    final_data_ponies = []
-    for p in ponies:
-        split_p = p.split(",")
-        pony_tuple = (int(split_p[0]), split_p[1], parse_string(split_p[2:]))
-        final_data_ponies.append(pony_tuple)
-    return final_data_ponies
+# def split_ponies(ponies):
+#     final_data_ponies = []
+#     for p in ponies:
+#         split_p = p.split(",")
+#         pony_tuple = (int(split_p[0]), split_p[1], parse_string(split_p[2:]))
+#         final_data_ponies.append(pony_tuple)
+#     return final_data_ponies
 
 
 # read_file_1("file_example1.txt")
 # read_file_2("file_example2.txt")
 
-# print(read_file_1("file_example1.txt"))
+# print(read_file("file_example2.txt"))
 # print(read_file_1("file_example2.txt"))
 
 
@@ -57,7 +58,7 @@ def split_ponies(ponies):
 #     ponies = content.split("\n\n")[2].split("\n")[1:]
 #     return split_elevation(elevations), split_path(path), split_ponies(ponies)
 
-# def read_file(file_name): # prototype
+# def read_file_0(file_name): # prototype
 #     with open(file_name, "r") as f:
 #         data_separated = f.read().replace(" ", "").split("\n\n")
 #         elevations = data_separated[0].split("\n")[1:]
