@@ -1,0 +1,136 @@
+import copy
+
+# check
+def find_distance(elevations, path):
+    ele_diff = []
+    for i in range(1, len(path)):
+        x, y = path[i]
+        m, n = path[i-1]
+        try:
+            diff = elevations[x][y] - elevations[m][n]
+        except IndexError:
+            print(f"Removing {x,y} due to IndexError")
+            continue
+        ele_diff.append(diff)
+    return ele_diff
+
+
+# def do_a(pony, next_energy, log_value):
+#     for before in range(pony[0]):
+#         before_pony = log_value[before]
+#         if before_pony[-1][-1] == pony[-1][-1]:
+#             if pony[-1][0] >= next_energy:
+#                 before_pony[-1][0] = next_energy
+#                 pony[-1][0] = pony[-1][0] - next_energy
+
+# havent check
+def do_a(pony, next_energy, log_value):
+    last_p, last_e = pony[-1]
+    for i, before_pony in enumerate(log_value):
+        if before_pony[-1][-1] == last_e:
+            for before_p in before_pony:
+                if before_p[-1] == last_e and before_p[0] >= next_energy:
+                    before_p[0] -= next_energy
+                    last_p -= next_energy
+                    break
+            else:
+                continue
+            break
+
+
+# check
+def do_pony(timestep, path, distance_list, log):
+    log_value = []
+    ponies = copy.deepcopy(log[timestep - 1])
+    for pony in ponies:
+        location = pony[-1][-1]
+        if pony[0] < timestep and location != path[-1]:
+            path_index = path.index(location)
+            next_energy = distance_list[path_index]
+            if pony[1] == "a":
+                do_a(pony, next_energy, log_value)
+            if pony[-1][0] >= next_energy:
+                next_step = path_index + 1
+                pony[-1][0] = pony[-1][0] - next_energy
+                pony[-1][-1] = path[next_step]
+        log_value.append(pony)
+    log[timestep] = log_value
+
+
+# check
+def done(log, timestep, ponies):
+    if log[timestep] == log[timestep - 1] and timestep - 1 > max(pony[0] for pony in ponies):
+        del log[timestep]
+        return False
+    return True
+
+# check    
+def climb(path, elevations, ponies):
+    timestep = 0
+    log = {timestep : ponies}
+    distance_list = find_distance(elevations, path)
+    check_done = True
+    max_timesteps = len(path) * len(ponies) # Set a maximum number of timesteps based on the number of ponies and the length of the path
+    while check_done and timestep < max_timesteps: # Add a check to ensure the loop does not run indefinitely
+        timestep += 1
+        do_pony(timestep, path, distance_list, log)
+        check_done = done(log, timestep, ponies)
+    return log
+
+
+# def climb(path, elevations, ponies):
+#     timestep = 0
+#     log = {timestep : ponies}
+#     distance_list = find_distance(elevations, path)
+#     check_done = True
+#     while check_done:
+#         timestep += 1
+#         do_pony(timestep, path, distance_list, log)
+#         check_done = done(log, timestep, ponies)
+#     print(log)
+
+# test 1
+ponies=[(0, 's', [7, (0, 0)]), (1, 's', [2, (0, 0)]), (2, 's', [25, (0, 0)])]
+path = [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]
+elevations = [[0, 32, 45], [2, 5, 19], [7, 6, 25]]
+
+print(climb(path, elevations, ponies) == {0: [(0, 's', [7, (0, 0)]), (1, 's', [2, (0, 0)]), (2, 's', [25, (0, 0)])], 
+1: [(0, 's', [5, (1, 0)]), (1, 's', [2, (0, 0)]), (2, 's', [25, (0, 0)])], 
+2: [(0, 's', [0, (2, 0)]), (1, 's', [0, (1, 0)]), (2, 's', [25, (0, 0)])], 
+3: [(0, 's', [1, (2, 1)]), (1, 's', [0, (1, 0)]), (2, 's', [23, (1, 0)])], 
+4: [(0, 's', [1, (2, 1)]), (1, 's', [0, (1, 0)]), (2, 's', [18, (2, 0)])], 
+5: [(0, 's', [1, (2, 1)]), (1, 's', [0, (1, 0)]), (2, 's', [19, (2, 1)])], 
+6: [(0, 's', [1, (2, 1)]), (1, 's', [0, (1, 0)]), (2, 's', [0, (2, 2)])]})
+
+#test 2
+elevations = [[0, 10, 20], [0, 0, 20], [0, 0, 0]]
+path = [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3)]
+ponies = [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])]
+
+print(climb(path, elevations, ponies) == {0: [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])], 
+1: [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])], 
+2: [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])]})
+
+#test 3
+elevations = [[0, 0], [0, 0]]
+path = [(0, 0), (1, 0), (1, 1)]
+ponies = [(0, 's', [0, (0, 0)])]
+
+print(climb(path, elevations, ponies) == {0: [(0, 's', [0, (0, 0)])], 
+1: [(0, 's', [0, (1, 0)])], 
+2: [(0, 's', [0, (1, 1)])]})
+
+#test 4
+elevations = [[100, 90, 80, 0], [30, 20, 40, 100], [31, 45, 0, 400]]
+path = [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3), (2, 3)]
+ponies = [(0, 's', [0, (0, 0)]), (1, 's', [10, (0, 0)])]
+
+print(climb(path, elevations, ponies) == {0: [(0, 's', [0, (0, 0)]), (1, 's', [10, (0, 0)])], 
+1: [(0, 's', [10, (0, 1)]), (1, 's', [10, (0, 0)])], 
+2: [(0, 's', [20, (0, 2)]), (1, 's', [20, (0, 1)])], 
+3: [(0, 's', [60, (1, 2)]), (1, 's', [30, (0, 2)])], 
+4: [(0, 's', [0, (1, 3)]), (1, 's', [70, (1, 2)])], 
+5: [(0, 's', [0, (1, 3)]), (1, 's', [10, (1, 3)])]})
+
+
+

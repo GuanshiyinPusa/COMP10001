@@ -1,0 +1,16 @@
+loop ponies
+    check move
+
+check move
+    check id
+        if check a:
+            find_lucky
+                share
+                    do selfish climb a
+                    return final
+        #selfish
+        else: selfish climb
+            return final
+
+selfish climb
+    check more and check energy

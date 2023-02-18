@@ -15,7 +15,7 @@ def closest_greater_or_equal_number(arr, target):
         if tup[0] + tup[1] < target:
             continue
         diff = abs(tup[0] + tup[1] - target)
-        if not closest_tuple or (tup[0] + tup[1] >= target and diff < min_diff):
+        if not closest_tuple or diff < min_diff:
             min_diff = diff
             closest_tuple = tup
     return closest_tuple

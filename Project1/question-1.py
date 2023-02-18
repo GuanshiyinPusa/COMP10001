@@ -41,7 +41,7 @@ def check_path(elevations, path, capacities, assignments):
 
     # Path should end at (M,N) coordinate:
     if path[-1] != max(path):
-        return "Path should end at {} coordinate".format(max(path))
+        return f"Path should end at {max(path)} coordinate"
 
     # Illegal move
     for i in range(len(path) - 1):
@@ -58,13 +58,9 @@ def check_path(elevations, path, capacities, assignments):
         if total_capacity[l] < distance[l]:
             return path[l], 'Insufficient capacity assignment'
 
-    # Exceeding pony limit
-    for m in assignments:
-        if len(m) != 2:
-            return m, 'Exceeding pony limit'
-
-    # Success! Everything Checked!
-    return None
+    return next(
+        ((m, 'Exceeding pony limit') for m in assignments if len(m) != 2), None
+    )
 
 
 pony_capacities = [17, 37, 73]

@@ -1,60 +1,71 @@
 def find_distance(elevations, path):
-    result = {}
-    prev_coord = path[0]
-    for coord in path[1:]:
+    ele_diff = []
+    for i in range(1, len(path)):
+        x, y = path[i]
+        m, n = path[i-1]
         try:
-            elevation_diff = elevations[coord[0]][coord[1]] - elevations[prev_coord[0]][prev_coord[1]]
+            diff = elevations[x][y] - elevations[m][n]
         except IndexError:
-            print(f"Removing {coord} due to IndexError")
+            print(f"Removing {x,y} due to IndexError")
             continue
-        result[prev_coord] = elevation_diff
-        prev_coord = coord
-    return result
+        ele_diff.append(diff)
+    return ele_diff
 
 
-def check_move(pony, path, path_diff, timestep):
-    if check_id(pony, timestep) and check_more(pony, path) and check_energy(pony, path_diff):
-        for index in range(len(path)):
-            if path[index] == pony[-1][-1]:
-                location = path[index + 1]
-        pony_list = [pony[-1][0] - path_diff[pony[-1][-1]], location]
-        return (pony[0], 's', pony_list)
+def move_pony(pony, path, distance_list, log_value):
+    # print(f"pony:\n{pony}\n\n")
+    path_index = path.index(pony[-1][-1])
+    next_energy = distance_list[path_index]
+    # print(next_energy)
+    if pony[1] == "a":
+        for before in range(pony[0]):
+            before_pony = log_value[before]
+            if before_pony[-1][-1] == pony[-1][-1]:
+                if pony[-1][0] >= next_energy:
+                    before_pony[-1][0] = next_energy
+                    pony[-1][0] = pony[-1][0] - next_energy
+    if pony[-1][0] >= next_energy:
+        next_step = path_index + 1
+        pony[-1][0] = pony[-1][0] - next_energy
+        pony[-1][-1] = path[next_step]
+    # print(f"change to{pony}")
     return pony
 
 
-def check_id(pony, timestep):
-    # check if pony id < timestep
-    return pony[0] < timestep
+def do_pony(ponies, timestep, path, distance_list, log_value, log):
+    log_value = []
+    for pony in ponies:
+            if pony[0] < timestep and pony[-1][-1] != path[-1]:
+                moved_pony = move_pony(pony, path, distance_list, log_value)
+                log_value.append(moved_pony)
+            else:
+                log_value.append(pony)
+        # print(timestep, log_value)
+    log[timestep + 1] = log_value
 
-
-def check_more(pony, path):
-    # Get the last element of the tuple and check if it's equal to the maximum value in the path list
-    return pony[-1][-1] != max(path)
-
-
-def check_energy(pony, path_diff):
-    return pony[-1][0] >= path_diff[pony[-1][-1]]
-
-
-def loop_ponies(ponies, path, path_diff, timestep):
-    return [check_move(pony, path, path_diff, timestep) for pony in ponies]
-
-
-def selfish_climb(elevations, path, ponies):
-    path_diff = find_distance(elevations, path)
-    log = {0 : ponies}
+def teamwork_climb(elevations, path, ponies):
+    distance_list = find_distance(elevations, path)
     timestep = 0
+    log = {timestep : ponies}
+    # print(log)
     while True:
-        log[timestep+1] = loop_ponies(log[timestep], path, path_diff, timestep+1)
+        log_value = []
+        # print(f"timestep: {timestep}\n\n")
+        for pony in ponies:
+            if pony[0] < timestep and pony[-1][-1] != path[-1]:
+                moved_pony = move_pony(pony, path, distance_list, log_value)
+                log_value.append(moved_pony)
+            else:
+                log_value.append(pony)
+        # print(timestep, log_value)
+        log[timestep + 1] = log_value
         # check if reaches the final step
         if log[timestep + 1] == log[timestep] and timestep > max(
             pony[0] for pony in ponies
         ):
+            print(f"same: {timestep + 1} same as {timestep}")
             del log[timestep+1]
             return log
         timestep+=1
 
-# print(selfish_climb([[0, 32, 45], [2, 5, 19], [7, 6, 25]], [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)], [(0, 's', [7, (0, 0)]), (1, 's', [2, (0, 0)]), (2, 's', [25, (0, 0)])]))
-# print(selfish_climb([[0, 10, 20], [0, 0, 20], [0, 0, 0]], [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3)], [(0, 's', [0, (0, 0)]), (1, 's', [0, (0, 0)])]))
-# print(selfish_climb([[0, 0], [0, 0]], [(0, 0), (1, 0), (1, 1)], [(0, 's', [0, (0, 0)])]))
-# print(selfish_climb([[100, 90, 80, 0], [30, 20, 40, 100], [31, 45, 0, 400]], [(0, 0), (0, 1), (0, 2), (1, 2), (1, 3), (2, 3)], [(0, 's', [0, (0, 0)]), (1, 's', [10, (0, 0)])]))
+teamwork_climb([[0, 32, 45], [2, 5, 19], [7, 6, 25]], [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)], [(0, 's', [7, (0, 0)]), (1, 's', [2, (0, 0)]), (2, 's', [25, (0, 0)])])

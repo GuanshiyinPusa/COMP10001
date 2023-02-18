@@ -35,7 +35,7 @@ def closest_greater_or_equal_number(arr, target):
         if tup[0] + tup[1] < target:
             continue
         diff = abs(tup[0] + tup[1] - target)
-        if not closest_tuple or (tup[0] + tup[1] >= target and diff < min_diff):
+        if not closest_tuple or diff < min_diff:
             min_diff = diff
             closest_tuple = tup
     return closest_tuple
@@ -53,7 +53,7 @@ def check_path(elevations, path, capacities, assignments):
 
     # Path should end at (M,N) coordinate:
     if path[-1] != max(path):
-        return ("Path should end at {} coordinate".format(max(path)))
+        return f"Path should end at {max(path)} coordinate"
 
     # Illegal move
     for i in range(len(path) - 1):
@@ -70,13 +70,9 @@ def check_path(elevations, path, capacities, assignments):
         if total_capacity[l] < distance[l]:
             return (path[l], 'Insufficient capacity assignment')
 
-    # Exceeding pony limit
-    for m in assignments:
-        if len(m) != 2:
-            return (m, 'Exceeding pony limit')
-
-    # Success! Everything Checked!
-    return None
+    return next(
+        ((m, 'Exceeding pony limit') for m in assignments if len(m) != 2), None
+    )
 
 def assign_pony_to_path(elevations, assign_path, capacities):
     final_elevation = [elevations[x][y] for x, y in assign_path]
@@ -88,51 +84,6 @@ def assign_pony_to_path(elevations, assign_path, capacities):
                                range(i, len(capacities))]
         ans_capacity.append(closest_greater_or_equal_number(possible_capacities, m))
     return ans_capacity
-
-
-
-    # Cell coordinate is out of bounds:
-    for h in path_check:
-        if h[0] > (len(village_elevations) - 1) or h[1] > (len(village_elevations[0]) - 1):
-            print("({}, 'Cell coordinate is out of bounds')".format(path[-1]))
-            return 0
-
-    # Path should start at (0,0) coordinate:
-    if path_check[0] != (0, 0):
-        print("({}, 'Path should start at (0,0) coordinate')".format(path_check[0]))
-        return 0
-
-    # Path should end at (M,N) coordinate:
-    if path_check[-1] != max(path_check):
-        print("Path should end at {} coordinate".format(max(path_check)))
-        return 0
-
-    # Illegal move
-    for i in range(len(path_check) - 1):
-        if path_check[i][0] > path_check[i + 1][0] or path_check[i][1] > path_check[i + 1][1]:
-            print("({}, 'Illegal move')".format(path_check[i]))
-            return 0
-
-    # Insufficient capacity assignment
-    final_elevation = [elevations[x][y] for x, y in path_check]
-    distance = [(final_elevation[i + 1] - final_elevation[i])
-                for i in range(len(final_elevation) - 1)]
-    total_capacity = [sum(k) for k in assignments]
-
-    for l in range(len(total_capacity)):
-        if total_capacity[l] < distance[l]:
-            print("({}, 'Insufficient capacity assignment')".format(path_check[l]))
-            return 0
-
-    # Exceeding pony limit
-    for m in assignments:
-        if len(m) != 2:
-            print("({}, 'Exceeding pony limit')".format(m))
-            return 0
-
-    # Success! Everything Checked!
-    print("None\n")
-    return 0
 
 
 def find_path_greedy(elevations, capacities):
